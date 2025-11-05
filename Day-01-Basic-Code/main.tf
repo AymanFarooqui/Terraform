@@ -8,3 +8,5 @@ resource "aws_vpc" "name" {
    }
 
 }
+
+#Use -auto-approve to apply or destroy without confirmation
