@@ -7,3 +7,8 @@ resource "aws_instance" "name" {
   }
 
 }
+
+
+# terraform import resource.name resource_id/resource_name
+
+# Ex: terraform import aws_instance.name id-0157af9aea2eef34
