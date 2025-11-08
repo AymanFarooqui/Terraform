@@ -1,6 +1,6 @@
 resource "aws_db_instance" "default" {
   allocated_storage            = 10
-   identifier                  = "book-rds"
+  identifier                   = "rds-terraform"
   db_name                      = "mydb"
   engine                       = "mysql"
   engine_version               = "8.0"
@@ -13,12 +13,14 @@ resource "aws_db_instance" "default" {
   backup_window                = "02:00-03:00"          # Daily backup window (UTC)
 
 # Enable performance insights
-#  performance_insights_enabled          = true
-#  performance_insights_retention_period = 7            # Retain insights for 7 days
-  maintenance_window = "sun:04:00-sun:05:00"            # Maintenance every Sunday (UTC)
+# performance_insights_enabled          = true
+# performance_insights_retention_period = 7             # Retain insights for 7 days
+
+  maintenance_window  = "sun:04:00-sun:05:00"            # Maintenance every Sunday (UTC)
   deletion_protection = true
   skip_final_snapshot = true
-  depends_on = [ aws_db_subnet_group.sub-grp ]
+  depends_on          = [ aws_db_subnet_group.sub-grp ]
+
 }
 
 resource "aws_vpc" "name" {
@@ -28,18 +30,21 @@ resource "aws_vpc" "name" {
     }
   
 }
+
 resource "aws_subnet" "subnet-1" {
-    vpc_id = aws_vpc.name.id
-    cidr_block = "10.0.0.0/24"
+    vpc_id            = aws_vpc.name.id
+    cidr_block        = "10.0.0.0/24"
     availability_zone = "us-east-1a"
   
 }
+
 resource "aws_subnet" "subnet-2" {
-    vpc_id = aws_vpc.name.id
-    cidr_block = "10.0.1.0/24"
+    vpc_id            = aws_vpc.name.id
+    cidr_block        = "10.0.1.0/24"
     availability_zone = "us-east-1b"
   
 }
+
 resource "aws_db_subnet_group" "sub-grp" {
   name       = "mycutsubnet"
   subnet_ids = [aws_subnet.subnet-1.id, aws_subnet.subnet-2.id]
