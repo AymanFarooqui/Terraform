@@ -56,27 +56,38 @@ resource "aws_iam_role_policy_attachment" "rds_monitoring_attach" {
 
 resource "aws_db_subnet_group" "sub-grp" {
   name       = "mycutsubnet"
-  subnet_ids = [data.aws_subnet.subnet_1.id, data.aws_subnet.subnet_2.id]
+  subnet_ids = ["subnet-0efd5ae25626571de", "subnet-04bc41452ed28b7ce"]
   tags = {
     Name = "My DB subnet group"
   }
 }
 
 
-data "aws_subnet" "subnet_1" {
+# Using Data Source
 
-  filter {
-    name   = "tag:Name"
-    values = ["subnet-1"]
-  }
+# data "aws_subnet" "subnet_1" {
 
-}
+#   filter {
+#     name   = "tag:Name"
+#     values = ["subnet-1"]
+#   }
 
-data "aws_subnet" "subnet_2" {
+# }
 
-  filter {
-    name   = "tag:Name"
-    values = ["subnet-2"]
-  }
+# data "aws_subnet" "subnet_2" {
 
-}
+#   filter {
+#     name   = "tag:Name"
+#     values = ["subnet-2"]
+#   }
+
+# }
+
+
+# resource "aws_db_subnet_group" "sub-grp" {
+#   name       = "mycutsubnet"
+#   subnet_ids = [data.aws_subnet.subnet_1.id, data.aws_subnet.subnet_2.id]
+#   tags = {
+#     Name = "My DB subnet group"
+#   }
+# }
