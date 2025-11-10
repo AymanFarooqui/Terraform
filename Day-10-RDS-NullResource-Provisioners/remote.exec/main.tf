@@ -17,7 +17,7 @@ resource "null_resource" "remote_sql_exec" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("~/.ssh/my-key.pem")   # Replace with your PEM file path
+    private_key = file("~/.ssh/key.pem")   # Replace with your PEM file path
     host        = aws_instance.sql_runner.public_ip
   }
 
