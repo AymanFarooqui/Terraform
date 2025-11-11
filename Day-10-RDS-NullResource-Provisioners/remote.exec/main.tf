@@ -1,23 +1,27 @@
 # Example EC2 instance (replace with yours if already existing)
 resource "aws_instance" "sql_runner" {
-  ami                    = "ami-0bdd88bd06d16ba03" # Amazon Linux 2
+
+  ami                    = "ami-0bdd88bd06d16ba03"      # Amazon Linux 2
   instance_type          = "t3.micro"
-  key_name               = "key"                # Replace with your key pair name
+  key_name               = "key"                        # Replace with your key pair name
   associate_public_ip_address = true
+  user_data = "sudo yum install mariadb105-server -y"
 
   tags = {
     Name = "SQL Runner"
   }
+
 }
 
 # Deploy SQL remotely using null_resource + remote-exec
 resource "null_resource" "remote_sql_exec" {
-  depends_on = [aws_db_instance.mysql_rds, aws_instance.sql_runner]
+  #depends_on = [aws_db_instance.mysql_rds, aws_instance.sql_runner]
+  depends_on = [aws_instance.sql_runner]
 
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("~/.ssh/key.pem")   # Replace with your PEM file path
+    private_key = file("~/.ssh/key.pem")                # Replace with your PEM file path
     host        = aws_instance.sql_runner.public_ip
   }
 
