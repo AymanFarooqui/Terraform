@@ -9,8 +9,15 @@ resource "aws_instance" "name" {
 }
 
 
-resource "aws_s3_bucket" "name" {
+# Use "terraform workspace" to view global options for worksapce 
 
-    bucket = "day11-multiclouddevops-ayman"
-  
-}
+# Usage: terraform [global options] workspace
+
+#   new, list, show, select and delete Terraform workspaces.
+
+# Subcommands:
+#     delete    Delete a workspace
+#     list      List Workspaces
+#     new       Create a new workspace
+#     select    Select a workspace
+#     show      Show the name of the current workspace

@@ -15,8 +15,7 @@ resource "aws_instance" "sql_runner" {
 
 # Deploy SQL remotely using null_resource + remote-exec
 resource "null_resource" "remote_sql_exec" {
-  #depends_on = [aws_db_instance.mysql_rds, aws_instance.sql_runner]
-  depends_on = [aws_instance.sql_runner]
+  depends_on = [aws_db_instance.mysql_rds, aws_instance.sql_runner]
 
   connection {
     type        = "ssh"
