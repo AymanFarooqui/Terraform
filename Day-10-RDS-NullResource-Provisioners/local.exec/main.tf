@@ -8,6 +8,7 @@ resource "aws_db_instance" "mysql_rds" {
   db_name                 = "dev"
   allocated_storage       = 20
   skip_final_snapshot     = true
+  final_snapshot_identifier = "my-final-snapshot"
   publicly_accessible     = true
 }
 
