@@ -17,7 +17,6 @@ resource "aws_db_instance" "mysql" {
   username             = var.db_user
   password             = var.db_password
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
-  skip_final_snapshot       = true
-  final_snapshot_identifier = "my-final-snapshot"
+  skip_final_snapshot  = true
  
 }
