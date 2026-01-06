@@ -93,7 +93,7 @@ resource "aws_instance" "server" {
 
   connection {
     type        = "ssh"
-    user        = "ec2-user"                              # Correct for Ubuntu AMIs
+    user        = "ec2-user"                            # Correct for Ubuntu AMIs
     private_key = file("~/.ssh/id_ed25519")             # Path to private key
     host        = self.public_ip
     timeout     = "2m"
